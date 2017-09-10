@@ -58,6 +58,7 @@ class Model(object, metaclass=MetaModel):
 
     def __init__(self):
         super(Model, self).__setattr__('_extra', {})
+        self.set_data({})
 
     @classmethod
     def from_dict(cls, D):
@@ -86,6 +87,8 @@ class Model(object, metaclass=MetaModel):
             key = field.source or name
             if key in data:
                 setattr(self, name, data.get(key))
+            elif field.has_default():
+                setattr(self, name, field.default)
 
     def __setattr__(self, key, value):
         if key in self._fields:

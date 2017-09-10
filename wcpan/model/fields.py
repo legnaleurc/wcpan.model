@@ -15,6 +15,8 @@ ISO_DATETIME_PATTERN = (r'^({date})T({time})(Z|(([+\-])(\d{{2}}):(\d{{2}})))$'
 ISO_DATE_PATTERN = r'^{date}$'.format(date=DATE)
 ISO_TIME_PATTERN = r'^{time}$'.format(time=TIME)
 
+UNKNOWN = object()
+
 
 class BaseField(object):
     """Base class for all field types.
@@ -24,12 +26,15 @@ class BaseField(object):
     name as the key to retrieve the value from the source data.
 
     """
-    def __init__(self, source=None):
+    def __init__(self, source=None, default=UNKNOWN):
         self.source = source
+        self.default = default
+
+    def has_default(self):
+        return self.default is not UNKNOWN
 
     def populate(self, data):
         """Set the value or values wrapped by this field"""
-
         self.data = data
 
     def to_python(self):
