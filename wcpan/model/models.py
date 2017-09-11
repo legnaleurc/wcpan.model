@@ -89,6 +89,8 @@ class Model(object, metaclass=MetaModel):
                 setattr(self, name, data.get(key))
             elif field.has_default():
                 setattr(self, name, field.default)
+            elif field.required:
+                raise ValueError('required key `{0}` not found'.format(key))
 
     def __setattr__(self, key, value):
         if key in self._fields:

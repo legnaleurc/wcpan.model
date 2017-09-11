@@ -26,9 +26,10 @@ class BaseField(object):
     name as the key to retrieve the value from the source data.
 
     """
-    def __init__(self, source=None, default=UNKNOWN):
+    def __init__(self, source=None, default=UNKNOWN, required=False):
         self.source = source
         self.default = default
+        self.required = required
 
     def has_default(self):
         return self.default is not UNKNOWN
