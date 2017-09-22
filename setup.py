@@ -6,7 +6,7 @@ from setuptools import setup
 setup(
     name='wcpan.model',
     description='Declarative dictionary-based model classes for Python',
-    version='1.0.0.dev1',
+    version='1.0.0.dev2',
     packages=[
         'wcpan.model',
     ],
