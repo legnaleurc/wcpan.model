@@ -185,11 +185,10 @@ class WrappedObjectField(BaseField):
     """Superclass for any fields that wrap an object"""
 
     def __init__(self, wrapped_class, related_name=None, **kwargs):
+        super(WrappedObjectField, self).__init__(**kwargs)
         self._wrapped_class = wrapped_class
         self._related_name = related_name
         self._related_obj = None
-
-        BaseField.__init__(self, **kwargs)
 
 
 class ModelField(WrappedObjectField):
